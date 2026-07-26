@@ -1,10 +1,7 @@
-import sys
-import locale
-# 设置系统编码为终端支持的编码
-if sys.stdout.encoding != 'utf-8':
-    sys.stdout.reconfigure(encoding='utf-8')
-
-name = input('请输入你的名字：')
-year = input('请输入你的出生年份：')
-age = 2026 - int(year)
-print(name + '，你今年' + str(age) + '岁啦！')
+﻿score=int(input("请输入的你的成绩:"))
+if score>=90:
+    print("优秀，太厉害了！")
+elif score>=60:
+    print("及格了，还可以再努力下！")
+else:
+    print("不及格，下次加油！")
