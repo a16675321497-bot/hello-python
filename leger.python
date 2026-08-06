@@ -1,0 +1,68 @@
+import json
+from datetime import datetime
+
+# 从文件读取账本
+def 读取账本():
+    try:
+        with open("账本.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return []
+
+# 保存账本到文件
+def 保存账本(账本):
+    with open("账本.json", "w", encoding="utf-8") as f:
+        json.dump(账本, f, ensure_ascii=False, indent=2)
+
+# 添加一笔记录
+def 添加记录(账本):
+    类型 = input("收入还是支出？（收入/支出）：")
+    金额 = float(input("金额："))
+    说明 = input("说明：")
+    时间 = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+    记录 = {"类型": 类型, "金额": 金额, "说明": 说明, "时间": 时间}
+    账本.append(记录)
+    保存账本(账本)
+    print("记录成功！")
+
+# 查看所有记录
+def 查看记录(账本):
+    if len(账本) == 0:
+        print("还没有记录！")
+        return
+
+    总收入 = 0
+    总支出 = 0
+    print("\n=== 所有记录 ===")
+    for 记录 in 账本:
+        print(记录["时间"], 记录["类型"], 记录["金额"], 记录["说明"])
+        if 记录["类型"] == "收入":
+            总收入 += 记录["金额"]
+        else:
+            总支出 += 记录["金额"]
+
+    print("\n总收入：", 总收入)
+    print("总支出：", 总支出)
+    print("结余：", 总收入 - 总支出)
+
+# 主程序
+账本 = 读取账本()
+
+while True:
+    print("\n=== 简易记账本 ===")
+    print("1. 添加记录")
+    print("2. 查看记录")
+    print("3. 退出")
+
+    选择 = input("请选择（1-3）：")
+
+    if 选择 == "1":
+        添加记录(账本)
+    elif 选择 == "2":
+        查看记录(账本)
+    elif 选择 == "3":
+        print("再见！")
+        break
+    else:
+        print("输入错误！")

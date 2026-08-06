@@ -35,4 +35,3 @@ elif 选择 == "4":
  print(num1, "÷", num2, "=", 结果)
 else:
  print("输入错误！")
- 结果 = round(结果, 2)  # 保留2位小数
